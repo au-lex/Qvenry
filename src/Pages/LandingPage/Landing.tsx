@@ -1,13 +1,17 @@
 import React from 'react'
-import Sidebar from '../../Layout/NavLink'
-import AdminHeader from '../../Layout/Header'
+import Sidebar from '../../Components/NavLink'
+import AdminHeader from '../../Components/Header'
+import AdminLayout from '../../Layout/AdminLayout'
 
 const Landing: React.FC = () => {
   return (
     <>
-<AdminHeader />
+    <AdminLayout>
+      <p>hello</p>
+    </AdminLayout>
+{/* <AdminHeader /> */}
 
-<Sidebar />
+{/* <Sidebar /> */}
     </>
   )
 }
