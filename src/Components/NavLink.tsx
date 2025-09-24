@@ -125,7 +125,7 @@ const Sidebar: React.FC = () => {
   ];
 
   return (
-    <div className="w-64 bg-white border-r border-gray-200 h-screen overflow-y-auto">
+    <div className="w-64 bg-white border-r fixed border-gray-200 z-50 h-screen overflow-y-auto scrollbar-hide">
       <div className="p-4">
         {navSections.map((section, sectionIndex) => (
           <div key={sectionIndex} className="mb-6">
@@ -134,26 +134,15 @@ const Sidebar: React.FC = () => {
               {section.items.map((item, itemIndex) => (
                 <li key={itemIndex}>
                   <button
-                    className={`w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 ${
-                      item.isActive
-                        ? sectionIndex === 0
-                          ? 'bg-orange-50 text-orange-600'
-                          : 'bg-gray-100 text-gray-900'
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
-                    }`}
+                    className={`w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150`}
                   >
                     <div className="flex items-center">
-                      <span className={`${item.isActive && sectionIndex === 0 ? 'text-orange-600' : 'text-gray-500'} mr-3`}>
+                      <span className="text-gray-500 mr-3">
                         {item.icon}
                       </span>
                       {item.label}
                     </div>
-                    {item.hasSubmenu && (
-                      <ChevronRight 
-                        size={14} 
-                        className={`${item.isActive && sectionIndex === 0 ? 'text-orange-600' : 'text-gray-400'}`}
-                      />
-                    )}
+          
                   </button>
                 </li>
               ))}
