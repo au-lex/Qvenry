@@ -1,15 +1,13 @@
 import React from 'react'
+import Sidebar from '../../Layout/NavLink'
+import AdminHeader from '../../Layout/Header'
 
 const Landing: React.FC = () => {
   return (
     <>
+<AdminHeader />
 
-    <h1 className='text-shadow'>landing,,,,Who</h1>
-
-    <p className='text-2xl bg-blue-500 '>mykkkk name man</p>
-      hello laning
-
-      <button className="hello btn-primary bg-red-500 cursor-pointer">Hello btn</button>
+<Sidebar />
     </>
   )
 }
