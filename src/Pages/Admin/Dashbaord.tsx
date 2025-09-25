@@ -9,7 +9,8 @@ import {
   DollarSign,
   Clock,
   Receipt,
-  Hash
+  Hash,
+  Info
 } from 'lucide-react';
 
 interface MetricCardProps {
@@ -38,25 +39,30 @@ const MetricCard: React.FC<MetricCardProps> = ({
   bgColor, 
   icon 
 }) => (
-  <div className={`${bgColor} rounded-xl  text-white`}>
-    <div className="flex items-c mb-4">
-      <div className="p-3 bg-white/20 rounded-lg">
+  <section className={`${bgColor} rounded-lg h-[6rem] items-center flex flex-col justify-center`}>
+    <section className="flex items-center justify-center gap-3 ">
+      <section className="p-3 bg-white/20 rounded-lg w-[3rem] h-[3rem] flex items-center justify-center">
         {icon}
-      </div>
-      <div>
-      <p className="text-sm text-white  mb-1">{title}</p>
-      <p className="text-2xl font-bold m text-white">{amount}</p>
-      <div className="flex items-center">
+      </section>
+
+      <section>
+      <p className="text-sm text-white ">{title}</p>
+      <span className="flex gap-3">
+
+      <p className="text-xl font-bold m text-white">{amount}</p>
+      <section className="flex items-center">
         <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${
           isPositive ? 'bg-white/20 text-white' : 'bg-red-100 text-red-800'
         }`}>
           {isPositive ? '↗' : '↘'} {percentage}
         </span>
-      </div>
-    </div>
-    </div>
+      </section>
+      </span>
+
+    </section>
+    </section>
   
-  </div>
+  </section>
 );
 
 const StatCard: React.FC<StatCardProps> = ({ 
@@ -67,17 +73,17 @@ const StatCard: React.FC<StatCardProps> = ({
   icon, 
   iconBg 
 }) => (
-  <div className="bg-white rounded-xl p-6 border border-gray-100">
-    <div className="flex items-center justify-between mb-4">
-      <div>
+  <section className="bg-white rounded-xl p-6 border border-br">
+    <section className="flex items-center justify-between mb-4">
+      <section>
         <p className="text-2xl font-bold text-gray-900">{amount}</p>
         <p className="text-sm text-gray-500">{title}</p>
-      </div>
-      <div className={`p-3 ${iconBg} rounded-lg`}>
+      </section>
+      <section className={`p-3 ${iconBg} rounded-lg`}>
         {icon}
-      </div>
-    </div>
-    <div className="flex items-center justify-between">
+      </section>
+    </section>
+    <section className="flex items-center justify-between">
       <span className={`text-sm font-medium ${
         isPositive ? 'text-green-600' : 'text-red-600'
       }`}>
@@ -86,44 +92,44 @@ const StatCard: React.FC<StatCardProps> = ({
       <button className="text-sm text-gray-500 hover:text-gray-700">
         View All
       </button>
-    </div>
-  </div>
+    </section>
+  </section>
 );
 
 const Dashboard: React.FC = () => {
   return (
-    <div className=" bg-gray-50 ">
-      <div className="max-w-7xl mx-auto">
+    <section className=" bg-gray-50 ">
+      <section className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div>
+        <section className="flex items-center justify-between mb-6">
+          <section>
             <h1 className="text-3xl font-bold text-gray-900">Welcome, Admin</h1>
             <p className="text-gray-600">
               You have <span className="text-orange-600 font-semibold">200+</span> Orders, Today
             </p>
-          </div>
-          <div className="flex items-center gap-2 text-gray-600">
+          </section>
+          <section className="flex items-center gap-2 text-gray-600 bg-white border border-br p-2 rounded">
             <Calendar size={20} />
-            <span>09/18/2025 - 09/24/2025</span>
-          </div>
-        </div>
+            <span className='text-[15px]'>09/18/2025 - 09/24/2025</span>
+          </section>
+        </section>
 
         {/* Alert */}
-        <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-            <p className="text-sm text-gray-700">
+        <section className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6 h-[3rem] flex items-center justify-between">
+          <section className="flex items-center  gap-3">
+           <Info size={20} className="text-orange-600" />
+            <p className="text-sm text-gray-700 pt-3">
               Your Product <span className="font-semibold text-orange-600">Apple Iphone 15</span> is running Low, 
               already below 5 Pcs. <span className="text-orange-600 underline cursor-pointer">Add Stock</span>
             </p>
-          </div>
+          </section>
           <button className="text-gray-400 hover:text-gray-600">
             <X size={20} />
           </button>
-        </div>
+        </section>
 
         {/* Metric Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6 text-white">
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6 text-white">
           <MetricCard
             title="Total Sales"
             amount="$48,988,078"
@@ -156,10 +162,10 @@ const Dashboard: React.FC = () => {
             bgColor="bg-gradient-to-r from-blue-500 to-blue-600"
             icon={<Shield size={24} />}
           />
-        </div>
+        </section>
 
         {/* Stat Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
             title="Profit"
             amount="$8,458,798"
@@ -192,9 +198,9 @@ const Dashboard: React.FC = () => {
             icon={<Hash size={20} className="text-purple-600" />}
             iconBg="bg-purple-100"
           />
-        </div>
-      </div>
-    </div>
+        </section>
+      </section>
+    </section>
   );
 };
 

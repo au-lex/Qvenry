@@ -33,7 +33,7 @@ import {
   PackageOpen,
   Receipt,
 
-  ChevronRight,
+
 
 } from 'lucide-react';
 
@@ -125,10 +125,24 @@ const Sidebar: React.FC = () => {
   ];
 
   return (
-    <div className="w-64 bg-white border-r fixed border-gray-200 z-50 h-screen overflow-y-auto scrollbar-hide">
-      <div className="p-4">
+    <section className="w-64 bg-white border-r fixed border-gray-200 z-50 h-screen overflow-y-auto scrollbar-hide">
+
+
+<div className="bg-white p-4 ">
+           
+            <figure className="flex items-center gap-3 border-b border-gray-300 b0 p-3">
+                <div className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+                    <img src="https://res.cloudinary.com/dmhvsyzch/image/upload/v1752636697/Screenshot_from_2025-07-16_01-11-43_nvlklc.png" 
+                         alt="logo" 
+                         className="w-[8rem] h-[6rem] object-cover" />
+                </div>
+                <h2 className="text-2xl   font-extrabold">QVENTRY</h2>
+            </figure>
+        </div>
+
+      <section className="p-4 px-6">
         {navSections.map((section, sectionIndex) => (
-          <div key={sectionIndex} className="mb-6">
+          <nav key={sectionIndex} className="mb-6">
             <h3 className="text-sm font-medium text-gray-500 mb-3">{section.title}</h3>
             <ul className="space-y-1">
               {section.items.map((item, itemIndex) => (
@@ -147,10 +161,10 @@ const Sidebar: React.FC = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         ))}
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };
 
