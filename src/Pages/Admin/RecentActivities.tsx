@@ -1,8 +1,37 @@
 import React from 'react';
-import { ChevronDown, AlertTriangle } from 'lucide-react';
+import { ChevronDown, AlertTriangle, TrendingUp, ShoppingCart } from 'lucide-react';
 
-// Mock data for the RecentActivity
-const topSellingProducts = [
+// Types
+interface BaseProduct {
+  id: number;
+  name: string;
+  image: string;
+  bgColor: string;
+}
+
+interface TopSellingProduct extends BaseProduct {
+  price: number;
+  sales: string;
+  change: number;
+  iconBg: string;
+}
+
+interface LowStockProduct extends BaseProduct {
+  productId: string;
+  stock: number;
+}
+
+interface RecentSale extends BaseProduct {
+  category: string;
+  price: number;
+  date: string;
+  status: 'Processing' | 'Cancelled' | 'Onhold' | 'Completed';
+}
+
+type StatusType = 'processing' | 'cancelled' | 'onhold' | 'completed';
+
+// Mock data
+const topSellingProducts: TopSellingProduct[] = [
   {
     id: 1,
     name: "Charger Cable - Lighting",
@@ -55,7 +84,7 @@ const topSellingProducts = [
   }
 ];
 
-const lowStockProducts = [
+const lowStockProducts: LowStockProduct[] = [
   {
     id: 1,
     name: "Dell XPS 13",
@@ -98,7 +127,7 @@ const lowStockProducts = [
   }
 ];
 
-const recentSales = [
+const recentSales: RecentSale[] = [
   {
     id: 1,
     name: "Apple Watch Series 9",
@@ -151,9 +180,76 @@ const recentSales = [
   }
 ];
 
-const RecentActivity = () => {
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
+// Component interfaces
+interface ActivityCardProps {
+  title: string;
+  icon: React.ReactNode;
+  iconBg?: string;
+  headerAction?: React.ReactNode;
+  children: React.ReactNode;
+}
+
+interface ListItemProps {
+  children: React.ReactNode;
+}
+
+interface ProductAvatarProps {
+  image: string;
+  bgColor: string;
+}
+
+// Reusable Card Component
+const ActivityCard: React.FC<ActivityCardProps> = ({ 
+  title, 
+  icon, 
+  iconBg = "bg-blue-100", 
+  headerAction, 
+  children 
+}) => {
+  return (
+    <section className="bg-white rounded-xl border border-gray-200">
+      <section className="p-5 border-b border-gray-100">
+        <section className="flex items-center justify-between">
+          <section className="flex items-center gap-3">
+            <section className={`w-8 h-8 ${iconBg} rounded-lg flex items-center justify-center`}>
+              {icon}
+            </section>
+            <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
+          </section>
+          {headerAction}
+        </section>
+      </section>
+      
+      <section className="p-1">
+        <section className="space-y-4">
+          {children}
+        </section>
+      </section>
+    </section>
+  );
+};
+
+// Reusable List Item Component
+const ListItem: React.FC<ListItemProps> = ({ children }) => {
+  return (
+    <section className="flex items-center gap-4 p-3 border-b border-gray-200 hover:bg-gray-50 rounded-lg transition-colors">
+      {children}
+    </section>
+  );
+};
+
+// Product Avatar Component
+const ProductAvatar: React.FC<ProductAvatarProps> = ({ image, bgColor }) => {
+  return (
+    <section className={`w-12 h-12 ${bgColor} rounded-xl flex items-center justify-center text-xl`}>
+      {image}
+    </section>
+  );
+};
+
+const RecentActivity: React.FC = () => {
+  const getStatusColor = (status: StatusType): string => {
+    switch (status.toLowerCase() as StatusType) {
       case 'processing':
         return 'bg-purple-500 text-white';
       case 'cancelled':
@@ -167,143 +263,116 @@ const RecentActivity = () => {
     }
   };
 
-  return (
-    <div className=" bg-gray-50 mt-[4rem] ">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+  const TopSellingCard: React.FC = () => (
+    <ActivityCard
+      title="Top Selling Products"
+      icon={<TrendingUp className="w-4 h-4 text-blue-600" />}
+      iconBg="bg-blue-100"
+      headerAction={
+        <button className="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+          <span>Today</span>
+          <ChevronDown className="w-4 h-4" />
+        </button>
+      }
+    >
+      {topSellingProducts.map((product: TopSellingProduct) => (
+        <ListItem key={product.id}>
+          <ProductAvatar image={product.image} bgColor={product.bgColor} />
           
-          {/* Top Selling Products */}
-          <div className="bg-white rounded-xl  border border-br ">
-            <div className="p-6 border-b border-gray-100">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
-                    <div className="w-4 h-4 bg-pink-500 rounded"></div>
-                  </div>
-                  <h2 className="text-lg font-semibold text-gray-900">Top Selling Products</h2>
-                </div>
-                <button className="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
-                  <span>Today</span>
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-            
-            <div className="p-6">
-              <div className="space-y-4">
-                {topSellingProducts.map((product) => (
-                  <div key={product.id} className="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                    <div className={`w-12 h-12 ${product.bgColor} rounded-xl flex items-center justify-center text-xl`}>
-                      {product.image}
-                    </div>
-                    
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-gray-900 truncate">{product.name}</h3>
-                      <div className="flex items-center gap-3 mt-1">
-                        <span className="text-sm font-medium text-gray-900">${product.price}</span>
-                        <span className="text-sm text-gray-500">{product.sales}</span>
-                      </div>
-                    </div>
-                    
-                    <div className={`px-2 py-1 rounded-md text-xs font-medium ${
-                      product.change > 0 
-                        ? 'bg-green-100 text-green-700' 
-                        : 'bg-red-100 text-red-700'
-                    }`}>
-                      {product.change > 0 ? '↗' : '↘'} {Math.abs(product.change)}%
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <section className="flex-1 min-w-0">
+            <h3 className="font-medium text-gray-900 truncate">{product.name}</h3>
+            <section className="flex items-center gap-3 mt-1">
+              <span className="text-sm font-medium text-gray-900">${product.price}</span>
+              <span className="text-sm text-gray-500">{product.sales}</span>
+            </section>
+          </section>
+          
+          <section className={`px-2 py-1 rounded-md text-xs font-medium ${
+            product.change > 0 
+              ? 'bg-green-100 text-green-700' 
+              : 'bg-red-100 text-red-700'
+          }`}>
+            {product.change > 0 ? '↗' : '↘'} {Math.abs(product.change)}%
+          </section>
+        </ListItem>
+      ))}
+    </ActivityCard>
+  );
 
-          {/* Low Stock Products */}
-          <div className="bg-white rounded-xl border border-br ">
-            <div className="p-6 border-b border-gray-100">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
-                    <AlertTriangle className="w-4 h-4 text-orange-500" />
-                  </div>
-                  <h2 className="text-lg font-semibold text-gray-900">Low Stock Products</h2>
-                </div>
-                <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                  View All
-                </button>
-              </div>
-            </div>
-            
-            <div className="p-6">
-              <div className="space-y-4">
-                {lowStockProducts.map((product) => (
-                  <div key={product.id} className="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                    <div className={`w-12 h-12 ${product.bgColor} rounded-xl flex items-center justify-center text-xl`}>
-                      {product.image}
-                    </div>
-                    
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-gray-900 truncate">{product.name}</h3>
-                      <p className="text-sm text-gray-500 mt-1">ID : {product.productId}</p>
-                    </div>
-                    
-                    <div className="text-right">
-                      <p className="text-xs text-gray-500 mb-1">Instock</p>
-                      <p className="text-lg font-semibold text-orange-500">{product.stock}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+  const LowStockCard: React.FC = () => (
+    <ActivityCard
+      title="Low Stock Products"
+      icon={<AlertTriangle className="w-4 h-4 text-orange-600" />}
+      iconBg="bg-orange-100"
+      headerAction={
+        <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+          View All
+        </button>
+      }
+    >
+      {lowStockProducts.map((product: LowStockProduct) => (
+        <ListItem key={product.id}>
+          <ProductAvatar image={product.image} bgColor={product.bgColor} />
+          
+          <section className="flex-1 min-w-0">
+            <h3 className="font-medium text-gray-900 truncate">{product.name}</h3>
+            <p className="text-sm text-gray-500 mt-1">ID : {product.productId}</p>
+          </section>
+          
+          <section className="text-right">
+            <p className="text-xs text-gray-500 mb-1">Instock</p>
+            <p className="text-lg font-semibold text-orange-500">{product.stock}</p>
+          </section>
+        </ListItem>
+      ))}
+    </ActivityCard>
+  );
 
-          {/* Recent Sales */}
-          <div className="bg-white rounded-xl  border border-br">
-            <div className="p-6 border-b border-gray-100">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
-                    <div className="w-4 h-4 bg-pink-500 rounded"></div>
-                  </div>
-                  <h2 className="text-lg font-semibold text-gray-900">Recent Sales</h2>
-                </div>
-                <button className="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
-                  <span>Weekly</span>
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-            
-            <div className="p-6">
-              <div className="space-y-4">
-                {recentSales.map((sale) => (
-                  <div key={sale.id} className="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                    <div className={`w-12 h-12 ${sale.bgColor} rounded-xl flex items-center justify-center text-xl`}>
-                      {sale.image}
-                    </div>
-                    
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-gray-900 truncate">{sale.name}</h3>
-                      <div className="flex items-center gap-3 mt-1">
-                        <span className="text-sm text-gray-500">{sale.category}</span>
-                        <span className="text-sm font-medium text-gray-900">${sale.price}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="text-right">
-                      <p className="text-sm text-gray-500 mb-2">{sale.date}</p>
-                      <span className={`px-2 py-1 rounded-md text-xs font-medium ${getStatusColor(sale.status)}`}>
-                        {sale.status}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  const RecentSalesCard: React.FC = () => (
+    <ActivityCard
+      title="Recent Sales"
+      icon={<ShoppingCart className="w-4 h-4 text-green-600" />}
+      iconBg="bg-green-100"
+      headerAction={
+        <button className="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+          <span>Weekly</span>
+          <ChevronDown className="w-4 h-4" />
+        </button>
+      }
+    >
+      {recentSales.map((sale: RecentSale) => (
+        <ListItem key={sale.id}>
+          <ProductAvatar image={sale.image} bgColor={sale.bgColor} />
+          
+          <section className="flex-1 min-w-0">
+            <h3 className="font-medium text-gray-900 truncate">{sale.name}</h3>
+            <section className="flex items-center gap-3 mt-1">
+              <span className="text-sm text-gray-500">{sale.category}</span>
+              <span className="text-sm font-medium text-gray-900">${sale.price}</span>
+            </section>
+          </section>
+          
+          <section className="text-right">
+            <p className="text-sm text-gray-500 mb-2">{sale.date}</p>
+            <span className={`px-2 py-1 rounded-md text-xs font-medium ${getStatusColor(sale.status.toLowerCase() as StatusType)}`}>
+              {sale.status}
+            </span>
+          </section>
+        </ListItem>
+      ))}
+    </ActivityCard>
+  );
+
+  return (
+    <section className="bg-gray-50 mt-16">
+      <section className="max-w-7xl mx-auto">
+        <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+          <TopSellingCard />
+          <LowStockCard />
+          <RecentSalesCard />
+        </section>
+      </section>
+    </section>
   );
 };
 

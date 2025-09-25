@@ -73,7 +73,7 @@ const StatCard: React.FC<StatCardProps> = ({
   icon, 
   iconBg 
 }) => (
-  <section className="bg-white rounded-xl p-6 border border-br">
+  <section className="bg-white rounded-lg p-4 border border-br">
     <section className="flex items-center justify-between mb-4">
       <section>
         <p className="text-2xl font-bold text-gray-900">{amount}</p>
@@ -83,11 +83,14 @@ const StatCard: React.FC<StatCardProps> = ({
         {icon}
       </section>
     </section>
+
+<div className='border-b border-br mb-4' />
+
     <section className="flex items-center justify-between">
       <span className={`text-sm font-medium ${
         isPositive ? 'text-green-600' : 'text-red-600'
       }`}>
-        {percentage} vs Last Month
+        {percentage} <span className="text-gray-600">vs Last Month</span> 
       </span>
       <button className="text-sm text-gray-500 hover:text-gray-700">
         View All
@@ -118,7 +121,7 @@ const Dashboard: React.FC = () => {
         <section className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6 h-[3rem] flex items-center justify-between">
           <section className="flex items-center  gap-3">
            <Info size={20} className="text-orange-600" />
-            <p className="text-sm text-gray-700 pt-3">
+            <p className="text-sm text-gray-700 ">
               Your Product <span className="font-semibold text-orange-600">Apple Iphone 15</span> is running Low, 
               already below 5 Pcs. <span className="text-orange-600 underline cursor-pointer">Add Stock</span>
             </p>

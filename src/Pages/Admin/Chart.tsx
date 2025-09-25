@@ -54,29 +54,29 @@ const AnalyticsDashboard: React.FC = () => {
   const totalSales = salesData.reduce((sum, item) => sum + item.sales, 0);
 
   return (
-    <div className=" bg-gray-50 mt-[4rem] ">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <section className=" bg-gray-50 mt-[4rem] ">
+      <section className="max-w-7xl mx-auto space-y-6">
         
         {/* Sales & Purchase Chart Section */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           
           {/* Main Chart */}
-          <div className="xl:col-span-2 bg-white rounded-xl  border border-br ">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+          <section className="xl:col-span-2 bg-white rounded-xl  border border-br ">
+            <section className="">
+              <section className="flex items-center justify-between mb-6  p-4 border-b border-br">
+                <section className="flex items-center gap-3">
+                  <section className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
                     <ShoppingCart className="w-4 h-4 text-orange-500" />
-                  </div>
+                  </section>
                   <h2 className="text-lg font-semibold text-gray-900">Sales & Purchase</h2>
-                </div>
+                </section>
                 
-                <div className="flex items-center gap-2">
+                <section className="flex items-center ">
                   {timeFilters.map((filter) => (
                     <button
                       key={filter.value}
                       onClick={() => handleTimeFilterChange(filter.value)}
-                      className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
+                      className={`px-3 py-1.5 text-sm font-medium border border-br outline-0 transition-colors ${
                         filter.active
                           ? 'bg-orange-500 text-white'
                           : 'text-gray-600 hover:bg-gray-100'
@@ -85,33 +85,34 @@ const AnalyticsDashboard: React.FC = () => {
                       {filter.label}
                     </button>
                   ))}
-                </div>
-              </div>
+                </section>
+              </section>
 
-              <div className="flex items-center gap-6 mb-6">
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="w-3 h-3 bg-orange-200 rounded"></div>
+              <section className="flex items-center gap-3 mb-6 p-4">
+                <section className='border border-br p-3 rounded-lg'>
+                  <section className="flex items-center gap-2 mb-1 ">
+                    <section className="w-3 h-3 bg-orange-200 rounded"></section>
                     <span className="text-sm text-gray-500">Total Purchase</span>
-                  </div>
+                  </section>
                   <p className="text-2xl font-bold text-gray-900">
                     {Math.round(totalPurchase / 1000)}K
                   </p>
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="w-3 h-3 bg-orange-500 rounded"></div>
+                </section>
+
+                <section className='border border-br p-3 rounded-lg'>
+                  <section className="flex items-center gap-2 mb-1">
+                    <section className="w-3 h-3 bg-orange-500 rounded"></section>
                     <span className="text-sm text-gray-500">Total Sales</span>
-                  </div>
+                  </section>
                   <p className="text-2xl font-bold text-gray-900">
                     {Math.round(totalSales / 1000)}K
                   </p>
-                </div>
-              </div>
+                </section>
+              </section>
 
-              <div className="h-80">
+              <section className="h-100">
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={salesData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                  <BarChart data={salesData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
                     <XAxis 
                       dataKey="time" 
@@ -139,68 +140,68 @@ const AnalyticsDashboard: React.FC = () => {
                     />
                   </BarChart>
                 </ResponsiveContainer>
-              </div>
-            </div>
-          </div>
+              </section>
+            </section>
+          </section>
 
           {/* Overall Information */}
-          <div className="bg-white rounded-xl  border border-br">
-            <div className="p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                  </div>
-                </div>
+          <section className="bg-white rounded-xl  border border-br">
+            <section className="p-6">
+              <section className="flex items-center gap-3 mb-6">
+                <section className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <section className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
+                    <section className="w-2 h-2 bg-white rounded-full"></section>
+                  </section>
+                </section>
                 <h2 className="text-lg font-semibold text-gray-900">Overall Information</h2>
-              </div>
+              </section>
 
-              <div className="space-y-6 grid grid-cols-1 lg:grid-cols-3">
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <section className="space-y-6 grid grid-cols-1 lg:grid-cols-3">
+                <section className="text-center">
+                  <section className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-3">
                     <Users className="w-6 h-6 text-blue-500" />
-                  </div>
+                  </section>
                   <p className="text-sm text-gray-500 mb-1">Suppliers</p>
                   <p className="text-2xl font-bold text-gray-900">6987</p>
-                </div>
+                </section>
 
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <section className="text-center">
+                  <section className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-3">
                     <Users className="w-6 h-6 text-orange-500" />
-                  </div>
+                  </section>
                   <p className="text-sm text-gray-500 mb-1">Customer</p>
                   <p className="text-2xl font-bold text-gray-900">4896</p>
-                </div>
+                </section>
 
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <section className="text-center">
+                  <section className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mx-auto mb-3">
                     <Package className="w-6 h-6 text-teal-500" />
-                  </div>
+                  </section>
                   <p className="text-sm text-gray-500 mb-1">Orders</p>
                   <p className="text-2xl font-bold text-gray-900">487</p>
-                </div>
-              </div>
+                </section>
+              </section>
 
 
                      {/* Customers Overview Section */}
-        <div className=" gap-6">
+        <section className=" gap-6">
           
           {/* Customer Overview Chart */}
-          <div className="bg-white rounded-xl r border-gray-100">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
+          <section className="bg-white rounded-xl r border-gray-100">
+            <section className="p-6">
+              <section className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-semibold text-gray-900">Customers Overview</h2>
                 <button className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors border">
                   <Calendar className="w-4 h-4" />
                   <span>Today</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
-              </div>
+              </section>
 
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <div className="h-48 flex items-center justify-center">
-                    <div className="relative">
+              <section className="flex items-center justify-between">
+                <section className="flex-1">
+                  <section className="h-48 flex items-center justify-center">
+                    <section className="relative">
                       <ResponsiveContainer width={200} height={200}>
                         <PieChart>
                           <Pie
@@ -218,43 +219,43 @@ const AnalyticsDashboard: React.FC = () => {
                           </Pie>
                         </PieChart>
                       </ResponsiveContainer>
-                    </div>
-                  </div>
-                </div>
+                    </section>
+                  </section>
+                </section>
                 
-                <div className="flex-1 space-y-4">
-                  <div className="text-center">
+                <section className="flex-1 space-y-4">
+                  <section className="text-center">
                     <p className="text-3xl font-bold text-gray-900">5.5K</p>
                     <p className="text-orange-500 font-medium mb-1">First Time</p>
-                    <div className="flex items-center justify-center gap-1">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <section className="flex items-center justify-center gap-1">
+                      <section className="w-2 h-2 bg-green-500 rounded-full"></section>
                       <span className="text-xs text-green-600 font-medium">25%</span>
-                    </div>
-                  </div>
+                    </section>
+                  </section>
                   
-                  <div className="text-center">
+                  <section className="text-center">
                     <p className="text-3xl font-bold text-gray-900">3.5K</p>
                     <p className="text-teal-500 font-medium mb-1">Return</p>
-                    <div className="flex items-center justify-center gap-1">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <section className="flex items-center justify-center gap-1">
+                      <section className="w-2 h-2 bg-green-500 rounded-full"></section>
                       <span className="text-xs text-green-600 font-medium">21%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                    </section>
+                  </section>
+                </section>
+              </section>
+            </section>
+          </section>
 
           {/* Settings Card */}
      
-        </div>
-            </div>
-          </div>
-        </div>
+        </section>
+            </section>
+          </section>
+        </section>
 
  
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };
 
