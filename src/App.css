@@ -8,7 +8,7 @@
   --color-accent: #ec4899;    
   --color-bg: #fff; 
   --color-text: #111827;      
-  --color-border: #e5e7eb;   
+  --color-br: #e5e7eb;   
   --color-success: #10b981;  
   --color-warning: #f59e0b;    
   --color-error: #ef4444;     
@@ -69,12 +69,9 @@
 @layer base {
 
   h1, h2, h3, h4, h5, h6, span, div {
-    @apply font-sans ;
+    @apply font-serif ;
   }
-  
-  p {
-    @apply text-gray-700 leading-relaxed mb-4 font-serif;
-  }
+
   
   a {
     @apply text-blue-600 hover:text-blue-800 underline font-sans;

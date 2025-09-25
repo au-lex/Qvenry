@@ -168,12 +168,12 @@ const RecentActivity = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 mt-[4rem] ">
+    <div className=" bg-gray-50 mt-[4rem] ">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           
           {/* Top Selling Products */}
-          <div className="bg-white rounded-xl  ">
+          <div className="bg-white rounded-xl  border border-br ">
             <div className="p-6 border-b border-gray-100">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -219,7 +219,7 @@ const RecentActivity = () => {
           </div>
 
           {/* Low Stock Products */}
-          <div className="bg-white rounded-xl ">
+          <div className="bg-white rounded-xl border border-br ">
             <div className="p-6 border-b border-gray-100">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -258,7 +258,7 @@ const RecentActivity = () => {
           </div>
 
           {/* Recent Sales */}
-          <div className="bg-white rounded-xl ">
+          <div className="bg-white rounded-xl  border border-br">
             <div className="p-6 border-b border-gray-100">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
