@@ -128,13 +128,13 @@ const Sidebar: React.FC = () => {
     <section className="w-64 bg-white border-r fixed border-gray-200 z-50 h-screen overflow-y-auto scrollbar-hide">
 
 
-<div className="bg-white p-4 ">
+<div className="bg-white  ">
            
             <figure className="flex items-center gap-3 border-b border-gray-300 b0 p-3">
-                <div className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+                <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
                     <img src="https://res.cloudinary.com/dmhvsyzch/image/upload/v1752636697/Screenshot_from_2025-07-16_01-11-43_nvlklc.png" 
                          alt="logo" 
-                         className="w-[8rem] h-[6rem] object-cover" />
+                         className="w-[8rem] h-[4rem] object-cover" />
                 </div>
                 <h2 className="text-2xl   font-extrabold">QVENTRY</h2>
             </figure>
